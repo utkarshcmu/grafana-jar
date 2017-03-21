@@ -1,3 +1,5 @@
+package io.github.utkarshcmu;
+
 public class Grafana {
 
 	private String url;
