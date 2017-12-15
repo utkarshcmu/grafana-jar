@@ -1,31 +1,44 @@
 package io.github.utkarshcmu.grafana;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 public class TimePicker {
 
-	private String[] refresh_intervals;
-	private String[] time_options;
+	private ObjectNode timepicker;
 	
-	public TimePicker() {
-		String[] intervals = {"5s", "10s", "30s", "1m", "5m", "15m", "30m", "1h", "2h", "1d"};
-		this.refresh_intervals = intervals;
-		String[] time_options = {"5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d", "30d"};
-		this.time_options = time_options;
+	TimePicker() {
+		ObjectMapper mapper = new ObjectMapper();
+		this.timepicker =  mapper.createObjectNode();
+		ArrayNode refreshIntervals = mapper.createArrayNode();
+		refreshIntervals.add("5s");
+		refreshIntervals.add("10s");
+		refreshIntervals.add("30s");
+		refreshIntervals.add("1m");
+		refreshIntervals.add("5m");
+		refreshIntervals.add("15m");
+		refreshIntervals.add("30m");
+		refreshIntervals.add("1h");
+		refreshIntervals.add("2h");
+		refreshIntervals.add("1d");
+		this.timepicker.putPOJO("refresh_intervals", refreshIntervals);
+		ArrayNode timeOptions = mapper.createArrayNode();
+		timeOptions.add("5m");
+		timeOptions.add("15m");
+		timeOptions.add("1h");
+		timeOptions.add("6h");
+		timeOptions.add("12h");
+		timeOptions.add("24h");
+		timeOptions.add("2d");
+		timeOptions.add("7d");
+		timeOptions.add("30d");
+		this.timepicker.putPOJO("time_options", timeOptions);
 	}
-
-	public String[] getRefresh_intervals() {
-		return refresh_intervals;
-	}
-
-	public void setRefresh_intervals(String[] refresh_intervals) {
-		this.refresh_intervals = refresh_intervals;
-	}
-
-	public String[] getTime_options() {
-		return time_options;
-	}
-
-	public void setTime_options(String[] time_options) {
-		this.time_options = time_options;
+	
+	public ObjectNode getTimePicker() throws JsonProcessingException {
+		return this.timepicker; 
 	}
 	
 }

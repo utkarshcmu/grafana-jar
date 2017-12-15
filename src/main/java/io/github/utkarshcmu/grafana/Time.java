@@ -1,28 +1,22 @@
 package io.github.utkarshcmu.grafana;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 public class Time {
 	
-	private String from;
-	private String to;
+	private ObjectNode time;
 	
 	Time() {
-		this.from = "now-6h";
-		this.to = "now";
+		ObjectMapper mapper = new ObjectMapper();
+		this.time =  mapper.createObjectNode();
+		this.time.put("from", "now-6h");
+		this.time.put("to", "now");
 	}
-
-	public String getFrom() {
-		return from;
+	
+	public ObjectNode getTime() throws JsonProcessingException {
+		return this.time; 
 	}
-
-	public void setFrom(String from) {
-		this.from = from;
-	}
-
-	public String getTo() {
-		return to;
-	}
-
-	public void setTo(String to) {
-		this.to = to;
-	}
+	
 }
